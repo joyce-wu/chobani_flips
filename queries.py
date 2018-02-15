@@ -22,10 +22,16 @@ def zip_code(zip):
         print r
 
 def zip_grade(zip, grade):
-    restaurants = collec.find({$and: [{"address.zipcode":str(zip)}, {"grade":grade}]})
+    restaurants = collec.find( { '$and': [{"address.zipcode":str(zip)}, {"grades.grade":grade}]})
     for r in restaurants:
         print r
-        
+
+def zip_score(zip, score):
+    restaurants = collec.find({'$and':[{"address.zipcode":str(zip)}, {"grades.score": {'$lt': score}}]})
+    for r in restaurants:
+        print r
+
 #borough("Manhattan")
 #zip_code(10025)
-zip_grade(10025, 'A')
+#zip_grade(10025, 'A')
+zip_score(10025, 13)
