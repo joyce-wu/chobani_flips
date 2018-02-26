@@ -32,22 +32,44 @@ def write_json(data):
     f.close()
 
 #retrieve data and insert into database and imported into json file
-#data = import_info()
+data = import_info()
 #write_json(data)
 #collie.insert_many(data)
 
+#parses through collection to convert all masses to floats from strings
+def convert():
+    #finds all landings with field mass
+    landings = collie.find()
+    for l in landings:
+	try:
+             l["mass"] = float(l["mass"])
+             collie.save(l)
+        except:
+             print "no mass"
+#convert()
+
 #retrieves all meteorite landings with mass less than n  
 def mass(n):
+    landings = collie.find({"mass": {"$lt": n}})
+    for l in landings:
+        print l
 
 #retrieves all meteorite landings with that recclass
 def recclass(recclass):
- 
+    landings = collie.find({"recclass": str(recclass)})
+    for l in landings:
+        print l
+
 #retrieves all meteorite landings with names that start with 'letter'
 #and have a mass less than 'mass' 
 def name_mass(letter, mass):
-
+    
 #retrieves meteorite landings with mass between mass1 and mass2
 def between_masses(mass1, mass2):
-
+    
 #retrieces meteorite landings with year, month, date, range of days)
 def date_range(y, m, d, range): 
+    
+#TESTING
+#recclass("L5")
+#mass(2000)
