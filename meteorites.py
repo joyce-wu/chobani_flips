@@ -63,13 +63,49 @@ def recclass(recclass):
 #retrieves all meteorite landings with names that start with 'letter'
 #and have a mass less than 'mass' 
 def name_mass(letter, mass):
+    landings = collie.find({"mass": {"$lt": mass}})
+    d = {}; 
+    for l in landings:
+        if l["name"][0].lower() == letter:
+            d[l["name"]] = l["mass"]
+    for meteorite in d:
+        print meteorite + ": " + str(d[meteorite]) 
     
+
+
 #retrieves meteorite landings with mass between mass1 and mass2
 def between_masses(mass1, mass2):
+    if mass1 > mass2:
+        max_val = mass1
+        min_val = mass2
+    else:
+        max_val = mass2
+        min_val = mass1 
+        
+    landings = collie.find({"mass": {"$lt": max_val}})
+    for l in landings:
+        if l["mass"] > min_val: 
+            print l
+
+
+#retrieves meteorite landings with a given year 
+def date_range(y):
+
+    landings = collie.find() 
     
-#retrieces meteorite landings with year, month, date, range of days)
-def date_range(y, m, d, range): 
+    for l in landings:
+        try: 
+            if l["year"][0:4] == str(y):
+                print l
+
+        except:
+            print ""
+
+                               
     
 #TESTING
 #recclass("L5")
 #mass(2000)
+#name_mass("a", 2000)
+#between_masses(300, 400)
+#date_range(1950)
