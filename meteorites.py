@@ -34,7 +34,8 @@ def write_json(data):
 #retrieve data and insert into database and imported into json file
 data = import_info()
 #write_json(data)
-#collie.insert_many(data)
+collie.drop()
+collie.insert_many(data)
 
 #parses through collection to convert all masses to floats from strings
 def convert():
@@ -49,10 +50,11 @@ def convert():
 #convert()
 
 #retrieves all meteorite landings with mass less than n  
-def mass(n):
+def mass(n, collie):
     landings = collie.find({"mass": {"$lt": n}})
     for l in landings:
         print l
+    return landings
 
 #retrieves all meteorite landings with that recclass
 def recclass(recclass):
