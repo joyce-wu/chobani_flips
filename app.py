@@ -16,6 +16,7 @@ def start():
     collie.drop()
     data = meteorites.import_info()
     collie.insert_many(data)
+    meteorites.convert()
     return render_template("welcome.html")
 
 @app.route("/mass")

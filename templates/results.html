@@ -2,6 +2,8 @@
   <body>
     {{ title }}
     <br>
-    {{ result   }}
+    {% for r in result %}
+    {{r["mass"]}}
+    {% endfor %}
   </body>
 </html>
