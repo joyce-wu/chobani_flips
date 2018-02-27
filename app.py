@@ -13,10 +13,11 @@ collie = mfDB.meteorites
 
 @app.route("/")
 def start():
+    global collie
     collie.drop()
     data = meteorites.import_info()
     collie.insert_many(data)
-    meteorites.convert()
+    collie = meteorites.convert(collie)
     return render_template("welcome.html")
 
 @app.route("/mass")

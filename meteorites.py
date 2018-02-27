@@ -38,7 +38,7 @@ collie.drop()
 collie.insert_many(data)
 
 #parses through collection to convert all masses to floats from strings
-def convert():
+def convert(collie):
     #finds all landings with field mass
     landings = collie.find()
     for l in landings:
@@ -47,6 +47,7 @@ def convert():
              collie.save(l)
         except:
              print "no mass"
+    return collie
 #convert()
 
 #retrieves all meteorite landings with mass less than n  
