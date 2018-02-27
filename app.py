@@ -26,10 +26,11 @@ def mass():
     m = float(request.args["mass"])
     landings = meteorites.mass(m, collie)
     for l in landings:
+        print l
         global data
         data[l["name"]] = l["mass"]
              
-    return render_template("results.html", title="masses", result=data)
+    return render_template("results.html", title="masses", result=data, m = m)
 
 if __name__ == "__main__":
     app.debug = True

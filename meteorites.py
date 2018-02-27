@@ -54,8 +54,8 @@ def convert(collie):
 #retrieves all meteorite landings with mass less than n  
 def mass(n, collie):
     landings = collie.find({"mass": {"$lt": n}})
-    for l in landings:
-        print l
+    #for l in landings:
+        #print l
     return landings
 
 #retrieves all meteorite landings with that recclass
