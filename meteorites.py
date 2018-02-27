@@ -42,6 +42,7 @@ def convert(collie):
     #finds all landings with field mass
     landings = collie.find()
     for l in landings:
+        print l
 	try:
              l["mass"] = float(l["mass"])
              collie.save(l)

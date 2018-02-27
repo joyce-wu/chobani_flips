@@ -15,6 +15,7 @@ collie = mfDB.meteorites
 def start():
     global collie
     collie.drop()
+    global data
     data = meteorites.import_info()
     collie.insert_many(data)
     collie = meteorites.convert(collie)
@@ -24,9 +25,11 @@ def start():
 def mass():
     m = float(request.args["mass"])
     landings = meteorites.mass(m, collie)
-    print m
-    print landings
-    return render_template("results.html", title="masses", result=landings)
+    for l in landings:
+        global data
+        data[l["name"]] = l["mass"]
+             
+    return render_template("results.html", title="masses", result=data)
 
 if __name__ == "__main__":
     app.debug = True
